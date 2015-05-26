@@ -37,7 +37,7 @@ app.get('/users', function(req, res){
             res.send('error: '+err);
         } else {
             var collection = db.collection('users').find().limit(10).toArray(function(err, docs) {
-                res.send(JSON.stringify(docs));
+                res.send(docs);
                 db.close();
             });
         }
