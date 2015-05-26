@@ -31,13 +31,39 @@ app.get('/', function(req, res){
     res.send('<h2 style="color: red;">Hello world!!!!</h2>');
 });
 
-app.get('/users', function(req, res){
+app.get('/recommendedmovies', function(req, res){
     MongoClient.connect('mongodb://'+connection_string, function (err, db) {
         if (err) {
-            res.send('error: '+err);
+            res.send({status: 'error', error: 'error: '+err});
         } else {
-            var collection = db.collection('users').find().limit(10).toArray(function(err, docs) {
-                res.send(docs);
+            var collection = db.collection('recommendedmovies');
+            collection.find().limit(10).toArray(function(err, docs) {
+                if(err){
+                    res.send({status: 'error', error: 'error: '+err});
+                } else {
+                    res.send({status: 'ok', data: docs});
+                }
+                db.close();
+            });
+        }
+    });
+});
+
+app.post('/recommendedfilms', function(req, res){
+    var data = {'movie': req.body.movie, 'comment': req.body.comment};
+
+    MongoClient.connect('mongodb://'+connection_string, function (err, db) {
+        if (err) {
+            res.send({status: 'error', error: 'error: '+err});
+        } else {
+            var collection = db.collection('recommendedmovies');
+            collection.insert(data, function(err, result){
+                if(err){
+                    res.send({status: 'error', error: 'error: '+err});
+                } else {
+                    res.send({status: 'ok'});
+                }
+                
                 db.close();
             });
         }
