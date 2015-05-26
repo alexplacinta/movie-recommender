@@ -57,7 +57,7 @@ app.post('/recommendedmovies', function(req, res){
             res.send({status: 'error', error: 'error: '+err});
         } else {
             var collection = db.collection('recommendedmovies');
-            collection.insert(data, function(err, result){
+            collection.insert([data], function(err, result){
                 if(err){
                     res.send({status: 'error', error: 'error: '+err});
                 } else {
