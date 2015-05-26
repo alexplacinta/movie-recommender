@@ -50,9 +50,9 @@ app.get('/recommendedmovies', function(req, res){
 });
 
 app.post('/recommendedmovies', function(req, res){
-    res.send('checked work')
+    
     var data = {'movie': req.body.movie, 'comment': req.body.comment};
-
+res.send(data)
     MongoClient.connect('mongodb://'+connection_string, function (err, db) {
         if (err) {
             res.send({status: 'error', error: 'error: '+err});
