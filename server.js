@@ -36,6 +36,7 @@ app.get('/users', function(req, res){
         if (err) {
             res.send('error: '+err);
         } else {
+            res.send('connected to db');
             var collection = db.collection('users').find().limit(10).toArray(function(err, docs) {
                 res.send(JSON.stringify(collection));
                 db.close();
