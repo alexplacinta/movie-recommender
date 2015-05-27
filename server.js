@@ -1,15 +1,16 @@
-
+//require drivers
 var express = require('express');
 var mongodb = require('mongodb');
 
+//set server
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
 var port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
+var app = express.createServer();
+app.listen(port, ipaddress, function(){console.log('Server runs...')});
 
+//database connection variables
 var MongoClient = mongodb.MongoClient;
-
-
 var connection_string = '127.0.0.1:27017/recommendfilm';
-
 if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
   connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
   process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
@@ -19,16 +20,9 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
 }
 
 
-
-
-var app = express.createServer();
-
-
-app.listen(port, ipaddress, function(){console.log('Server runs...')});
-
-//routes
+//set routes
 app.get('/', function(req, res){
-    res.send('<h2 style="color: red;">Hello world!!!!</h2>');
+    res.send('<h2 style="color: green;">Welcome to Recommender-movies REST SERVICE!!!!</h2>');
 });
 
 app.get('/recommendedmovies', function(req, res){
