@@ -31,7 +31,7 @@ app.get('/recommendedmovies', function(req, res){
             res.send({status: 'error', error: 'error: '+err});
         } else {
             var collection = db.collection('recommendedmovies');
-            collection.find().limit(10).sort( { _id: -1 } ).toArray(function(err, docs) {
+            collection.find().limit(30).sort( { _id: -1 } ).toArray(function(err, docs) {
                 if(err){
                     res.send({status: 'error', error: 'error: '+err});
                 } else {
