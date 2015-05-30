@@ -45,7 +45,7 @@ app.get('/recommendedmovies', function(req, res){
 
 app.post('/recommendedmovies', function(req, res){
 
-    var data = {movie: req.get('movie'), comment: req.get('comment')};
+    var data = {movie: req.body.movie, comment: req.body.comment};
 
     MongoClient.connect('mongodb://'+connection_string, function (err, db) {
         if (err) {
