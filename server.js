@@ -44,7 +44,7 @@ app.get('/recommendedmovies', function(req, res){
 });
 
 app.post('/recommendedmovies', function(req, res){
-res.send(req.body);
+res.send("dsa");
     var data = {movie: req.body.movie, comment: req.body.comment};
 
     MongoClient.connect('mongodb://'+connection_string, function (err, db) {
