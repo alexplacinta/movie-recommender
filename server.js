@@ -20,9 +20,7 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
 }
 
 //app config
-app.configure(function() {
-  app.use(express.bodyParser());
-}
+app.use(express.bodyParser());
 
 //set routes
 app.get('/', function(req, res){
